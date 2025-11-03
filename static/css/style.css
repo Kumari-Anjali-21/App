@@ -1,0 +1,49 @@
+/* index */
+
+.hero {
+      background: url('../images/frndGrp.jpeg') center center/cover no-repeat;
+      height: 80vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px #000;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      text-shadow: 1px 1px 5px #000;
+    }
+    footer {
+      background-color: #212529;
+      color: white;
+      padding: 20px 0;
+    }
+
+    /* signup */
+
+     body {
+      background: #f0f4f8;
+    }
+    .signup-container {
+      max-width: 900px;
+      margin: auto;
+      margin-top: 60px;
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .form-section {
+      padding: 40px;
+    }
+    .form-control {
+      border-radius: 10px;
+    }
+    .form-label {
+      font-weight: 500;
+    }

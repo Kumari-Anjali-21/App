@@ -1,0 +1,94 @@
+{% extends "userLayout.html" %}
+
+{% block content %}
+
+  
+  <div class="signup-box" data-aos="fade-up">
+    <h2 class="text-center mb-4">Send Location Request</h2>
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    {% for msg in message %}
+     <p class="alert alert-danger">{{msg}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+  </div>
+
+  <!-- list of friends -->
+
+  <table class="table table-dark table-hover md-3 ">
+    <thead>
+      <tr>
+        <td>Friend ID</td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Location request</td>
+      </tr>
+    </thead>
+    <tbody>
+    {% if record %}
+      {% for r in record %}
+      <tr>
+        <td>{{r[0]}}</td>
+        <td>{{r[1]}}</td>
+        <td>{{r[2]}}</td>
+        <td><a href="/friendLocationRequest?friendEmail={{r[2]}}">Request</a></td>
+      </tr>
+      {% endfor %}
+    {% else %}
+    <tr>
+      <th colspan="5">
+        <p class="alert alert-primary text-center">You have no friends in the list..</p>
+      </th>
+    </tr>
+    {% endif %}
+    </tbody>
+  </table>
+
+  <!-- receive location request -->
+
+  <table class="table table-dark table-hover md-3 ">
+    <thead>
+      <tr class="table-success">
+        <th colspan="4">Receive Location Request</th>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Send</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if record1 %}
+      {% for r in record1 %}
+      <tr>
+        <td>{{r[1]}}</td>
+        <td>{{r[0]}}</td>
+        <td><a id="sendLink" href="/sendLocation?friendEmail={{r[0]}}"><button class="btn btn-danger">Send</button></a></td>
+      </tr>
+      {% endfor %}
+    {% else %}
+    <tr>
+      <th colspan="5">
+        <p class="alert alert-danger text-center">You do not have any request...</p>
+      </th>
+    </tr>
+    {% endif %}
+    </tbody>
+  </table>
+  <script>
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        let url= document.getElementById("sendLink").href;
+        document.getElementById("sendLink").href = url+`&lat=${lat}&lon=${lon}`;
+      },
+      function(error) {
+        document.getElementById("coords").innerText = "Failed to send location: " + error.message;
+      }
+    );
+  </script>
+
+{% endblock %}

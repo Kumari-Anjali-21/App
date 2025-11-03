@@ -1,0 +1,30 @@
+{% extends "userLayout.html" %}
+
+{% block content %}
+  <h2>My Location</h2>
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    {% for msg in message %}
+     <p class="alert alert-danger">{{msg}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  <p id="coords">Fetching your location...</p>
+  <p><a id="mapLink" href="#" target="_blank">View on Google Maps</a></p>
+  <a id="userLink" href="#"><button class="btn btn-danger w-50">Share with Friends</button></a>
+  <script>
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        document.getElementById("coords").innerText = `Latitude: ${lat}, Longitude: ${lon}`;
+        document.getElementById("mapLink").href = `https://www.google.com/maps?q=${lat},${lon}`;
+        document.getElementById("userLink").href = `/userSendAddress?lat=${lat}&lon=${lon}`;
+      },
+      function(error) {
+        document.getElementById("coords").innerText = "Failed to get location: " + error.message;
+      }
+    );
+  </script>
+{% endblock %}

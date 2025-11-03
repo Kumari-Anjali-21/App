@@ -1,0 +1,38 @@
+{% extends "userLayout.html" %}
+
+{% block content %}
+
+  
+  <div class="signup-box" data-aos="fade-up">
+    <h2 class="text-center mb-4">Update Friend</h2>
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    {% for msg in message %}
+     <p class="alert alert-danger">{{msg}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% for r in record %}
+    <form class="shadow-lg p-3 rounded" action="/editFriend?friendID={{r[0]}}" method="post">
+
+     <div class="row mb-3">
+        <div class="col-md-5">
+          <label for="name" class="form-label">Friend Name</label>
+          <input type="text" name="name" value="{{r[1]}}" id="name" class="form-control">
+        </div>
+        <div class="col-md-5">
+          <label for="friendEmail" class="form-label">Friend Email</label>
+          <input type="email" name="friendEmail" value="{{r[2]}}" id="friendEmail" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <label for="addFriend" class="form-label">Click here</label>
+          <button type="submit" class="btn btn-outline-warning w-100">Edit Friend</button>
+        </div>
+      </div>
+      
+    </form>
+    {% endfor %}
+  </div>
+
+{% endblock %}

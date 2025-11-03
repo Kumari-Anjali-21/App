@@ -1,0 +1,45 @@
+{% extends "userLayout.html" %}
+
+{% block content %}
+  <!-- Signup Form -->
+  <div class="signup-box" data-aos="fade-up">
+    <h2 class="text-center mb-4">Your Account</h2>
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    {% for msg in message %}
+     <p class="alert alert-danger">{{msg}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% for r in record %}
+    <form action="/userProfile" method="post">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <p class="form-control bg-secondary">{{r[2]}}</p>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" name="firstName" value="{{r[0]}}" id="firstName" class="form-control">
+        </div>
+        <div class="col">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" name="lastName" value="{{r[1]}}" id="lastName" class="form-control">
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile Number</label>
+        <input type="tel" name="mobile" value="{{r[3]}}" id="mobile" class="form-control" >
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-25">Update Now</button>
+    </form>
+    {% endfor %}
+    <p class="mt-2"><a class="link link-success" href="/userPassword">Change Password</a></p>
+    <p class="mt-2"><a class="link link-danger" href="/userDelete">Account Delete</a></p>
+  </div>
+{% endblock %}
+  
+

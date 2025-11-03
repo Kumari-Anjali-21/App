@@ -1,0 +1,39 @@
+{% extends"userLayout.html" %}
+{% block content%}
+
+
+      <h3>Welcome, {{session['userName']}} !!</h3>
+      <p>Track friends' locations, manage your account, and get alerts in real-time.</p>
+
+      <div class="row mt-4">
+        <div class="col md-4 mb-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Total friends</h5>
+              <p class="card-text">{{totalFriend}} connected friends</p>
+            </div>
+          </div>
+        </div>
+        <div class="col md-4 mb-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Total Shared Location</h5>
+              <p class="card-text">{{totalShare}} times</p>
+            </div>
+          </div>
+        </div>
+        <div class="col md-4 mb-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Pending Requests </h5>
+              <p class="card-text">{{pendingRequest}} <a href="/friendLocation">pending requests</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>
+
+{% endblock %}
